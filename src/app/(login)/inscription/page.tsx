@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Button, NoticeMessage, NoticeMessageData } from 'tp-kit/components';
 import Layout from '../layout';
 import { useState } from "react";
+import { createUser } from "../../../actions/create-user";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const schema = z.object({
     name: z.string().min(1, {message: "Name can't be empty"}),
@@ -16,18 +18,29 @@ const schema = z.object({
 
 
 export default function Page() {
-
+    const supabase = createClientComponentClient();
     const handleErrors = (errors: typeof form.errors) => {
        /* setSubmissionError(true)
         setSubmissionSuccess(false)*/
         setMessageToDisplay(<NoticeMessage type={"error"} onDismiss={() => setMessageToDisplay(null)} message="Une erreur s'est produite !"/>)
     }
 
-    const handleSuccess = (values: typeof form.values) => {
+    const handleSuccess = async (values: typeof form.values) => {
         console.log(values);
         /*setSubmissionError(false)
         setSubmissionSuccess(true)*/
         setMessageToDisplay(<NoticeMessage type={"success"} onDismiss={() => setMessageToDisplay(null)} message="Votre inscription a bien été prise en compte. Validez votre adresse email pour vous connecter"/>)
+        const { data, error } = await supabase.auth.signUp(
+            {
+              email: form.getInputProps('email').value,
+              password: form.getInputProps('password').value,
+              options: {
+                data: {
+                  first_name: form.getInputProps('name').value,
+                }
+              }
+            }
+        )
     }
 
     const [submitionSuccess, setSubmissionSuccess] = useState(false)
@@ -44,7 +57,7 @@ export default function Page() {
     return <Layout>
         {messageToDisplay}
         <h1>Inscription</h1>
-        <form onSubmit={form.onSubmit(handleSuccess,handleErrors)}>
+        <form action={async () => await createUser(form)} onSubmit={form.onSubmit(handleSuccess,handleErrors)}>
             <TextInput label="Nom" withAsterisk description="Le nom qui sera utilisé pour vos commandes" placeholder='Entrez votre nom' required {...form.getInputProps("name")} />
             <TextInput label="Adresse email" withAsterisk placeholder='lin.guini@barilla.it' required {...form.getInputProps("email")}/>
             <PasswordInput label="Mot de passe" withAsterisk placeholder='Entrez votre mot de passe' {...form.getInputProps("password")}/>

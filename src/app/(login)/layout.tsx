@@ -1,8 +1,10 @@
-import React from "react";
+import { ReactNode } from "react";
 import { Card } from "tp-kit/components";
 
-export default function Layout({children}: {children: React.ReactNode}) {
-    return <Card>
-        {children}
-    </Card>
+export default function Layout({children}: {children: ReactNode}) {
+    return <>
+        <Card>
+            {children}
+        </Card>
+    </>
 }

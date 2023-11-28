@@ -1,5 +1,11 @@
 import { type ProductData, type ProductsCategoryData } from "tp-kit/types"
 
+declare module "@supabase/supabase-js" {
+  export interface UserMetadata {
+    name?: string
+  }
+}
+
 export type ProductFiltersResult = {
   categoriesSlugs : string[],
   search?: string,
