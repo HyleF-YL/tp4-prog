@@ -30,17 +30,20 @@ export default function Page() {
         /*setSubmissionError(false)
         setSubmissionSuccess(true)*/
         setMessageToDisplay(<NoticeMessage type={"success"} onDismiss={() => setMessageToDisplay(null)} message="Votre inscription a bien été prise en compte. Validez votre adresse email pour vous connecter"/>)
-        const { data, error } = await supabase.auth.signUp(
+        const res = await supabase.auth.signUp(
             {
-              email: form.getInputProps('email').value,
-              password: form.getInputProps('password').value,
+              email: values.email,
+              password: values.password,
               options: {
                 data: {
-                  first_name: form.getInputProps('name').value,
-                }
+                  first_name: values.name,
+                },
+                emailRedirectTo: 'http://localhost:3000/api/auth/callback'
               }
             }
         )
+        console.log(res);
+        
     }
 
     const [submitionSuccess, setSubmissionSuccess] = useState(false)
@@ -57,7 +60,7 @@ export default function Page() {
     return <Layout>
         {messageToDisplay}
         <h1>Inscription</h1>
-        <form action={async () => await createUser(form)} onSubmit={form.onSubmit(handleSuccess,handleErrors)}>
+        <form onSubmit={form.onSubmit(handleSuccess,handleErrors)}>
             <TextInput label="Nom" withAsterisk description="Le nom qui sera utilisé pour vos commandes" placeholder='Entrez votre nom' required {...form.getInputProps("name")} />
             <TextInput label="Adresse email" withAsterisk placeholder='lin.guini@barilla.it' required {...form.getInputProps("email")}/>
             <PasswordInput label="Mot de passe" withAsterisk placeholder='Entrez votre mot de passe' {...form.getInputProps("password")}/>
