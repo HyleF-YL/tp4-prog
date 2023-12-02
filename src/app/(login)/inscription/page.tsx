@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Button, NoticeMessage, NoticeMessageData } from 'tp-kit/components';
 import Layout from '../layout';
 import { useState } from "react";
-import { createUser } from "../../../actions/create-user";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const schema = z.object({
@@ -42,8 +41,6 @@ export default function Page() {
               }
             }
         )
-        console.log(res);
-        
     }
 
     const [submitionSuccess, setSubmissionSuccess] = useState(false)
