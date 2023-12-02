@@ -25,7 +25,6 @@ export default function Page() {
     }
 
     const handleSuccess = async (values: typeof form.values) => {
-        console.log(values);
         /*setSubmissionError(false)
         setSubmissionSuccess(true)*/
         setMessageToDisplay(<NoticeMessage type={"success"} onDismiss={() => setMessageToDisplay(null)} message="Votre inscription a bien été prise en compte. Validez votre adresse email pour vous connecter"/>)
