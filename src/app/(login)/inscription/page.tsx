@@ -40,6 +40,8 @@ export default function Page() {
               }
             }
         )
+        console.log(res);
+        
     }
 
     const [submitionSuccess, setSubmissionSuccess] = useState(false)

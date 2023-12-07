@@ -1,6 +1,6 @@
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
 # working directory name when running `supabase init`.
-project_id = "r05.05-tp-corrige-fin-tp3"
+project_id = "tp3-prog-supabase"
 
 [api]
 enabled = true

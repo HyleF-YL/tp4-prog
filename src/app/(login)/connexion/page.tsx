@@ -29,9 +29,11 @@ export default function Page() {
             email: values.email,
             password: values.password
         })
+        console.log(error);
+        
         router.refresh()
     })
-    //TODO pourquoi le layout ne s'applique pas aux deux page
+    //TODO pourquoi le layout ne s'applique pas aux deux pages
     return <div> 
         <h1>Connection</h1>
         <form onSubmit={form.onSubmit(handleSignin)}>
