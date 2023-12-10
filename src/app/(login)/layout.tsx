@@ -1,11 +1,11 @@
 "use client"
 import { ReactNode, useEffect, useReducer } from "react";
-import { Card } from "tp-kit/components";
+import { Card, SectionContainer, ZodI18nProvider } from "tp-kit/components";
 import { getUser } from "../../utils/supabase";
 import { createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-export default function Layout({children}: {children: ReactNode}) {
+export default function Layout({children}: {children: React.ReactNode}) {
     const supabase = createClientComponentClient()
     const router = useRouter()
     useEffect(() => {
@@ -15,8 +15,11 @@ export default function Layout({children}: {children: ReactNode}) {
                 router.replace('/')
         })
     }, [])
-    return <Card>
-            <>{children}</>
-           </Card>
+    return <SectionContainer>
+                <ZodI18nProvider>
+                    {children}
+                </ZodI18nProvider>
+            </SectionContainer>
+           
 
 }

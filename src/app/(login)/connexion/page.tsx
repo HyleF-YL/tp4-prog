@@ -3,7 +3,7 @@ import { z } from "zod"
 import { TextInput, PasswordInput } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import Link from 'next/link';
-import { Button } from 'tp-kit/components';
+import { Button, useZodI18n } from 'tp-kit/components';
 import Layout from '../layout';
 import { useCallback } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -13,9 +13,10 @@ export default function Page() {
     const router = useRouter()
     const supabase = createClientComponentClient()
     const schema = z.object({
-        email: z.string().email({message: "mail invalide"}),
-        password: z.string().min(6, {message: "Le mot de passe doit contenir au moins 6 caractères"}) // TODO faire la question 2.3
+        email: z.string().email(),
+        password: z.string().min(6)
     })
+    useZodI18n(z)
     const form = useForm({
         initialValues: {
             email: "",
@@ -33,7 +34,7 @@ export default function Page() {
         
         router.refresh()
     })
-    //TODO pourquoi le layout ne s'applique pas aux deux pages
+
     return <div> 
         <h1>Connection</h1>
         <form onSubmit={form.onSubmit(handleSignin)}>

@@ -12,7 +12,7 @@ import { getOrders } from "../../actions/get-orders";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const router = useRouter()
-  //const orders = await prisma.order.findMany(); //TODO mettre un effet de chargement 
+  //const orders = await prisma.order.findMany();
   const supabase = createClientComponentClient();
   const [user, setUser]: any = useState(null)
   const [orders, setOrders] = useState([])

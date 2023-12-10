@@ -21,5 +21,5 @@ export default async function OrderDetailsPage({params}: NextPageProps<Props>) {
 
   if (!order) notFound();
 
-  return <RealTimeOrderDetails><OrderDetailsLayout order={order} /></RealTimeOrderDetails> //TODO comprendre ce que le prof veut dire par "quand le composant est démonté"
+  return <RealTimeOrderDetails><OrderDetailsLayout order={order}/></RealTimeOrderDetails>
 }
