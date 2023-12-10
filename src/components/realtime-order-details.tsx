@@ -3,7 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { ReactNode, useEffect } from "react"
 
-export default async function RealTimeOrderDetails({children}: {children: ReactNode}) {
+export default function RealTimeOrderDetails({children}: {children: ReactNode}) {
     const supabase = createClientComponentClient()
     useEffect(() => {
         const channel = supabase

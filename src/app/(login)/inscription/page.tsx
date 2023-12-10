@@ -62,7 +62,7 @@ export default function Page() {
             <TextInput label="Nom" withAsterisk description="Le nom qui sera utilisé pour vos commandes" placeholder='Entrez votre nom' required {...form.getInputProps("name")} />
             <TextInput label="Adresse email" withAsterisk placeholder='lin.guini@barilla.it' required {...form.getInputProps("email")}/>
             <PasswordInput label="Mot de passe" withAsterisk placeholder='Entrez votre mot de passe' {...form.getInputProps("password")}/>
-            <Button fullWidth type={"submit"}>S'inscrire</Button>
+            <Button fullWidth type={"submit"}>S&aposinscrire</Button>
             <Link href={"/connexion"}>Déjà un compte, Se connecter</Link>
         </form> 
     </Layout>
