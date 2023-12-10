@@ -1,9 +1,13 @@
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
 export async function POST(request: NextRequest) {
+    console.log("rebuilding posts...");
+    
+    revalidatePath("/[categorySlug]/[productSlug]")
     console.log(request.headers);
     
     const apiKey = process.env.SUPABASE_WEBHOOK_KEY
